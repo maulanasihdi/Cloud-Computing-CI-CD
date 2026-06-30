@@ -15,4 +15,4 @@ jobs:
 
       - name: Copy files to web folder
         run: |
-          sudo cp -r *.html *.css /var/www/html/mywebsite/
+          cp -r *.html *.css /var/www/html/mywebsite/
