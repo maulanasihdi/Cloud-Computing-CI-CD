@@ -1,17 +1,272 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mille Bow — Cute Dessert & Bakery</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Quicksand:wght@400;500;600;700&display=swap');
+
+  :root{
+    --cream: #fff8f1;
+    --pink: #f9d7e0;
+    --pink-deep: #e8a5bb;
+    --blue: #cdeaf7;
+    --blue-deep: #8ec9e6;
+    --berry: #d1627d;
+    --navy: #3f4866;
+    --text-soft: #7c7896;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--navy);
+    font-family:'Quicksand',sans-serif;
+    overflow-x:hidden;
+  }
+  .script{font-family:'Parisienne',cursive;}
+  .display{font-family:'Fraunces',serif;}
+  ::selection{background:var(--pink-deep);color:#fff;}
+
+  /* floating bits */
+  .bit{position:absolute;pointer-events:none;opacity:.55;}
+
+  /* nav */
+  nav{
+    position:sticky;top:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 6vw;
+    background:rgba(255,248,241,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:2px dashed var(--pink-deep);
+  }
+  .logo{font-family:'Parisienne',cursive;font-size:1.7rem;color:var(--berry);}
+  nav ul{display:flex;gap:30px;list-style:none;}
+  nav a{color:var(--navy);text-decoration:none;font-weight:600;font-size:0.92rem;transition:color .2s;}
+  nav a:hover{color:var(--berry);}
+  .nav-cta{
+    background:var(--berry);color:#fff;padding:9px 20px;border-radius:30px;
+    text-decoration:none;font-weight:600;font-size:0.88rem;box-shadow:0 4px 0 var(--pink-deep);
+    transition:transform .15s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+
+  /* hero */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+    text-align:center;
+    padding:60px 6vw;
+    background:
+      radial-gradient(circle at 15% 20%, var(--pink) 0%, transparent 45%),
+      radial-gradient(circle at 85% 25%, var(--blue) 0%, transparent 45%),
+      radial-gradient(circle at 50% 90%, var(--pink) 0%, transparent 50%);
+  }
+  .ribbon{
+    font-family:'Quicksand',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.12em;
+    background:var(--blue);color:var(--navy);padding:8px 22px;border-radius:30px;
+    margin-bottom:26px;text-transform:uppercase;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(2.6rem,7vw,5.2rem);
+    line-height:1.05;
+    max-width:16ch;
+  }
+  .hero h1 .script-word{font-family:'Parisienne',cursive;color:var(--berry);font-weight:400;}
+  .hero p{
+    margin-top:24px;max-width:46ch;color:var(--text-soft);font-size:1.08rem;
+  }
+  .hero-cta{display:flex;gap:18px;margin-top:38px;flex-wrap:wrap;justify-content:center;}
+  .btn{
+    padding:14px 30px;border-radius:30px;font-weight:700;font-size:0.95rem;
+    text-decoration:none;transition:all .2s;
+  }
+  .btn-primary{background:var(--berry);color:#fff;box-shadow:0 5px 0 var(--pink-deep);}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 0 var(--pink-deep);}
+  .btn-ghost{background:#fff;color:var(--berry);border:2px solid var(--pink-deep);}
+  .btn-ghost:hover{background:var(--pink);}
+
+  /* divider scallop */
+  .scallop{
+    height:36px;width:100%;
+    background-image:radial-gradient(circle at 18px 0, transparent 17px, var(--cream) 18px);
+    background-size:36px 36px;
+    background-position:top;
+  }
+  .scallop.pink-bg{background-image:radial-gradient(circle at 18px 0, transparent 17px, var(--pink) 18px);}
+
+  section{padding:90px 6vw;}
+  .section-head{text-align:center;margin-bottom:54px;}
+  .section-head .tag{font-family:'Parisienne',cursive;color:var(--berry);font-size:1.4rem;}
+  .section-head h2{font-family:'Fraunces',serif;font-size:2.3rem;font-weight:600;margin-top:4px;}
+
+  /* menu */
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;max-width:1100px;margin:0 auto;}
+  .menu-card{
+    background:#fff;border-radius:24px;padding:28px 24px;text-align:center;
+    border:2px solid var(--pink);
+    transition:transform .2s, border-color .2s;
+    position:relative;
+  }
+  .menu-card:hover{transform:translateY(-6px) rotate(-1deg);border-color:var(--berry);}
+  .menu-card .icon{font-size:2.4rem;margin-bottom:14px;}
+  .menu-card h3{font-family:'Fraunces',serif;font-size:1.25rem;margin-bottom:8px;}
+  .menu-card p{color:var(--text-soft);font-size:0.9rem;margin-bottom:14px;}
+  .menu-card .price{font-weight:700;color:var(--berry);font-family:'Quicksand',sans-serif;}
+
+  /* about split */
+  .about-wrap{
+    background:var(--blue);
+    border-radius:36px;
+    max-width:1100px;margin:0 auto;
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+    padding:50px;
+  }
+  .about-wrap .photo-block{
+    background:#fff;border-radius:24px;height:280px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Parisienne',cursive;font-size:2rem;color:var(--pink-deep);
+    border:3px dashed var(--berry);
+  }
+  .about-wrap h2{font-family:'Fraunces',serif;font-size:2rem;margin-bottom:14px;}
+  .about-wrap p{color:var(--navy);opacity:.85;margin-bottom:14px;}
+  @media (max-width:780px){.about-wrap{grid-template-columns:1fr;padding:30px;}}
+
+  /* testimonials */
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;max-width:1100px;margin:0 auto;}
+  .testi-card{
+    background:var(--pink);border-radius:24px;padding:28px;position:relative;
+  }
+  .testi-card .stars{color:var(--berry);margin-bottom:10px;font-size:1rem;}
+  .testi-card p{font-style:italic;color:var(--navy);margin-bottom:16px;}
+  .testi-card .who{font-weight:700;font-family:'Quicksand',sans-serif;font-size:0.9rem;}
+
+  /* CTA banner */
+  .cta-banner{
+    background:var(--berry);border-radius:36px;max-width:1100px;margin:0 auto;
+    padding:60px 40px;text-align:center;color:#fff;
+  }
+  .cta-banner h2{font-family:'Fraunces',serif;font-size:2.1rem;margin-bottom:14px;}
+  .cta-banner p{opacity:.9;margin-bottom:28px;}
+  .cta-banner .btn-primary{background:#fff;color:var(--berry);box-shadow:0 5px 0 var(--pink);}
+
+  footer{
+    padding:50px 6vw 30px;text-align:center;color:var(--text-soft);font-size:0.88rem;
+  }
+  footer .logo{display:block;margin-bottom:10px;}
+
+  @media (max-width:680px){
+    nav ul{display:none;}
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Halo, ini website saya!</h1>
-        <p>Deploy otomatis menggunakan GitHub Actions 🚀</p>
-	    <p>Dari Kelompok 4 Anomali</p>
-        <p>ppppp</p>
+
+<nav>
+  <div class="logo">Mille Bow 🎀</div>
+  <ul>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#testi">Ulasan</a></li>
+  </ul>
+  <a href="#order" class="nav-cta">Pesan Sekarang</a>
+</nav>
+
+<section class="hero">
+  <div class="ribbon">🩵 fresh baked, daily 🎀</div>
+  <h1>Manis itu <span class="script-word">selucu</span> ini.</h1>
+  <p>Dessert box & kue lucu yang dibikin dengan cinta — perpaduan pink manja dan biru manis untuk setiap momen spesialmu.</p>
+  <div class="hero-cta">
+    <a href="#menu" class="btn btn-primary">Lihat Menu 🍰</a>
+    <a href="#order" class="btn btn-ghost">Pesan via WhatsApp</a>
+  </div>
+</section>
+<div class="scallop"></div>
+
+<section id="menu">
+  <div class="section-head">
+    <div class="tag">our favorites</div>
+    <h2>Menu Andalan</h2>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="icon">🍓</div>
+      <h3>Strawberry Cloud Cake</h3>
+      <p>Sponge lembut, cream lumer, topping strawberry segar.</p>
+      <div class="price">Rp 65.000</div>
     </div>
+    <div class="menu-card">
+      <div class="icon">🩵</div>
+      <h3>Blue Velvet Jar</h3>
+      <p>Velvet biru lembut dengan cream cheese manis.</p>
+      <div class="price">Rp 35.000</div>
+    </div>
+    <div class="menu-card">
+      <div class="icon">🎀</div>
+      <h3>Coquette Cookies Box</h3>
+      <p>Cookies pita warna pink, renyah di luar lembut di dalam.</p>
+      <div class="price">Rp 48.000</div>
+    </div>
+    <div class="menu-card">
+      <div class="icon">🍩</div>
+      <h3>Pink Glazed Donut</h3>
+      <p>Donat empuk dengan glaze pink dan taburan sprinkle.</p>
+      <div class="price">Rp 18.000</div>
+    </div>
+  </div>
+</section>
+
+<div class="scallop pink-bg" style="transform:rotate(180deg);"></div>
+<section style="background:var(--pink);" id="about">
+  <div class="about-wrap">
+    <div class="photo-block">🧁 your bakery photo here</div>
+    <div>
+      <h2>Tentang Mille Bow</h2>
+      <p>Mille Bow lahir dari kecintaan terhadap dessert manis dan estetika yang girly. Setiap kue dibuat fresh setiap hari pakai bahan pilihan, dikemas cantik supaya makin cocok buat hadiah atau self-reward.</p>
+      <p>Berbasis di Semarang, siap kirim ke seluruh kota untuk bikin harimu sedikit lebih manis. 🩵🎀</p>
+    </div>
+  </div>
+</section>
+
+<section id="testi" style="background:var(--cream);">
+  <div class="section-head">
+    <div class="tag">kata mereka</div>
+    <h2>Review Pelanggan</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Packagingnya cantik banget, rasanya juga juara. Worth it buat hadiah ulang tahun!"</p>
+      <div class="who">— Dinda</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Blue velvetnya jadi favorit, teksturnya lembut dan nggak terlalu manis."</p>
+      <div class="who">— Aulia</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Estetik dari kotak sampai isinya, langsung jadi pelanggan tetap."</p>
+      <div class="who">— Rara</div>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="cta-banner">
+    <h2>Siap manjain hari-harimu? 🎀</h2>
+    <p>Order langsung via WhatsApp, kita siapin dengan sepenuh hati.</p>
+    <a href="https://wa.me/" class="btn btn-primary">Chat WhatsApp →</a>
+  </div>
+</section>
+
+<footer>
+  <span class="logo script">Mille Bow</span>
+  <span>© 2026 Mille Bow Dessert & Bakery. Made with 🩵 in Semarang.</span>
+</footer>
+
 </body>
 </html>
